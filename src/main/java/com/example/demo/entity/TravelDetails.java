@@ -15,12 +15,13 @@ public class TravelDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private String name;
-    private String location;
+    private String destination;
     private LocalDate startDate;
     private LocalDate endDate;
     private String description;
     private String activities;
+    private String image;
+
 
 
     @ManyToOne

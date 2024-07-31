@@ -26,8 +26,8 @@ public class TravelController {
     }
 
     @PostMapping//request to send data in the database
-    public void save(@RequestBody TravelDetails travelDetails) {//Request body is the information we want to save
-        travelService.saveTravelInfo(travelDetails);
+    public void save(@RequestBody TravelDetails travelDetails, @RequestParam Long userId) {
+        travelService.saveTravelInfo(travelDetails, userId);
     }
 
     @GetMapping("/userInfo/{id}")
@@ -44,7 +44,14 @@ public class TravelController {
     // GET endpoint to fetch user profiles by user ID
     @GetMapping("/userInfo/users/{id}")
     public List<TravelDetails> getProfileByUserId(@PathVariable Long id) {
-        return travelService.getTravelDetailsByUserId(id); // Call service method to get profiles by user ID
+        return travelService.getTravelDetailsByUserId(id);
     }
-
+    @DeleteMapping("/delete/{userId}/{tripId}")
+    public void delete(@PathVariable Long userId, @PathVariable Long tripId) {
+        travelService.deleteTravelDetailsByUserIdAndTripId(userId, tripId);
+    }
+    @GetMapping("/upcoming/{userId}/{days}")
+    public List<TravelDetails> getUpcomingTrips(@PathVariable Long userId, @PathVariable int days) {
+        return travelService.getUpcomingTrips(userId, days);
+    }
 }
